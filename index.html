@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Dilatação Térmica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #74f1eb;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            border-color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .descricao-letra {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .mostrar-descricao {
+            background-color: #007BFF;
+            color: #fff;
+            border-color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-top: 5px;
+        }
+        .img{
+            border-color: #fff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calculadora de Dilatação Térmica</h1>
+    </header>
+
+    <div class="container">
+        <h2>           Calculadora de Dilatação Térmica</h2>
+        <form>
+            <label for="comprimentoInicial">Comprimento inicial, Área ou Volume (em metros):</label>
+            <input type="text" id="comprimentoInicial" placeholder="Comprimento inicial em metros">
+
+            <label for="coeficienteDilatacao">Coeficiente de Dilatação (α):</label>
+            <input type="text" id="coeficienteDilatacao" placeholder="Coeficiente de dilatação em 1/°C">
+
+            <label for="variacaoTemperatura">Variação de Temperatura (em C°):</label>
+            <input type="text" id="variacaoTemperatura" placeholder="Variação de temperatura em °C">
+
+            <label for="tipoDilatacao">Tipo de Dilatação:</label>
+            <select id="tipoDilatacao">
+                <option value="linear">Dilatação Linear</option>
+                <option value="superficial">Dilatação Superficial</option>
+                <option value="volumetrica">Dilatação Volumétrica</option>
+            </select>
+
+            <button type="button" onclick="calcularDilatacao()">Calcular Dilatação</button>
+        </form>
+
+        <div id="resultado"></div>
+        <ul>
+            <li>
+                <strong>Dilatação Linear:</strong> L = L0 * α * ΔT
+                <button class="mostrar-descricao" onclick="mostrarDescricao('comprimento')">Descrição</button>
+                <p class="descricao-letra" id="descricao-comprimento">->A dilatação linear ocorre quando um corpo sofre aumento em sua temperatura e, consequentemente, há aumento na distância entre dois pontos em seu interior. São exemplos desse fenômeno o aumento do comprimento de uma barra, o aumento do raio de uma esfera e o aumento da diagonal de um quadrado ou de um cubo.<br>->L é o comprimento final após a dilatação.<br> ->L0 é o comprimento inicial do objeto.<br> ->α é o coeficiente de dilatação linear do material.<br> ->ΔT é a variação de temperatura.</p>
+            </li>
+            <li>
+                <strong>Dilatação Superficial:</strong> A = A0 * (2*α) * ΔT
+                <button class="mostrar-descricao" onclick="mostrarDescricao('area')">Descrição</button>
+                <p class="descricao-letra" id="descricao-area">->Dilatação Superficial é o aumento do volume de um corpo que compreende duas dimensões - comprimento e largura.
+
+                    Esse processo decorre da exposição do corpo ao calor, fazendo com que os átomos se agitem e aumentem a distância entre eles, ou seja, se dilatem.<br>->A é a área final após a dilatação (aplicável à dilatação superficial).<br> ->A0 é a área inicial do objeto (aplicável à dilatação superficial).<br> ->α é o coeficiente de dilatação linear do material.<br> ->ΔT é a variação de temperatura.</p>
+            </li>
+            <li>
+                <strong>Dilatação Volumétrica:</strong> V = V0 * (3*α) * ΔT
+                <button class="mostrar-descricao" onclick="mostrarDescricao('volume')">Descrição</button>
+                <p class="descricao-letra" id="descricao-volume">->Dilatação Volumétrica é o aumento de um corpo submetido a aquecimento térmico que ocorre em três dimensões - altura, comprimento e largura.
+
+                    Quando aquecidos, os átomos que constituem os corpos se agitam, de modo que aumentam o espaço ocupado entre eles e, assim, os corpo se dilatam, ou incham.<br>->V é o volume final após a dilatação (aplicável à dilatação volumétrica).<br> ->V0 é o volume inicial do objeto (aplicável à dilatação volumétrica).<br> ->α é o coeficiente de dilatação linear do material.<br> ->ΔT é a variação de temperatura.</p>
+            </li>
+        </ul>
+        <h2>Tabela com alguns coeficientes de dilatação linear</h2>
+        <img src="tabeladilatacaotermica.jpg" alt="Exemplo de uma tabela de coeficientes de dilatação" class="img">
+        <h2>Exemplo na Informática: Dilatação de um Processador</h2>
+        <p>Em computadores, os processadores geram calor durante a operação devido à corrente elétrica que passa por eles. Essa geração de calor pode causar a dilatação térmica do processador. Para evitar problemas, os processadores são equipados com coolers e dissipadores de calor para controlar a temperatura e minimizar a dilatação.</p>
+
+        <img src="download.jpg" alt="Exemplo de um processador de computador" class="img">
+        <p>Feito por Esther Kelly, Larissa Almeida e Mateus Lúcio</p>
+    </div>
+
+    <script>
+        function calcularDilatacao() {
+            // Obter os valores dos campos de entrada
+            const comprimentoInicial = parseFloat(document.getElementById('comprimentoInicial').value);
+            const coeficienteDilatacao = parseFloat(document.getElementById('coeficienteDilatacao').value);
+            const variacaoTemperatura = parseFloat(document.getElementById('variacaoTemperatura').value);
+            const tipoDilatacao = document.getElementById('tipoDilatacao').value;
+
+            // Calcular a dilatação com base no tipo selecionado
+            let resultado = 0;
+            let descricao = "";
+            let unidademedida;
+
+            if (tipoDilatacao === 'linear') {
+                resultado = comprimentoInicial * coeficienteDilatacao * variacaoTemperatura;
+                descricao = "Dilatação Linear";
+                unidademedida = "m"
+            } else if (tipoDilatacao === 'superficial') {
+                resultado = comprimentoInicial * (2*coeficienteDilatacao) * variacaoTemperatura;
+                descricao = "Dilatação Superficial";
+                unidademedida = "m^2";
+            } else if (tipoDilatacao === 'volumetrica') {
+                resultado = comprimentoInicial * (3*coeficienteDilatacao) * variacaoTemperatura;
+                descricao = "Dilatação Volumétrica";
+                unidademedida = "m^3";
+            } 
+        
+            const resultadoElement = document.getElementById('resultado');
+            resultadoElement.innerHTML = `${descricao}: ${resultado.toFixed(2)} ${unidademedida}`;
+
+            
+            mostrarDescricao(tipoDilatacao);
+        }
+
+        function mostrarDescricao(tipo) {
+            const descricaoElement = document.getElementById(`descricao-${tipo}`);
+            const descricaoLetra = document.querySelector(`.descricao-letra[id="descricao-${tipo}"]`);
+
+            if (descricaoElement.style.display === "none") {
+                descricaoElement.style.display = "block";
+                descricaoLetra.style.display = "block";
+            } else {
+                descricaoElement.style.display = "none";
+                descricaoLetra.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
